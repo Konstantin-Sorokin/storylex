@@ -1,4 +1,4 @@
-"""Editable catalog identities. Published snapshots arrive in step 1.2."""
+"""Editorial identities and immutable published content."""
 
 import uuid
 
@@ -104,10 +104,23 @@ class Product(TitledIdentity):
     price_minor = models.PositiveIntegerField(default=0)
     currency = models.CharField(max_length=3, default="RUB", editable=False)
     trial_enabled = models.BooleanField(default=False)
+    current_revision = models.ForeignKey(
+        "PublishedRevision", null=True, blank=True, editable=False,
+        on_delete=models.PROTECT, related_name="current_for_products",
+    )
+    first_published_at = models.DateTimeField(null=True, editable=False)
+    availability = models.CharField(
+        max_length=9, choices=[("available", "Доступен"), ("blocked", "Заблокирован")],
+        default="available",
+    )
 
     class Meta:
         ordering = ("title_en", "id")
         constraints = [
+            models.CheckConstraint(
+                condition=Q(availability__in=("available", "blocked")),
+                name="product_availability_valid",
+            ),
             models.CheckConstraint(
                 condition=(
                     Q(kind="book", show__isnull=True, author__isnull=False)
@@ -157,9 +170,14 @@ class Product(TitledIdentity):
     def clean(self) -> None:
         super().clean()
         if not self._state.adding:
-            previous_kind = type(self).objects.get(pk=self.pk).kind
+            previous = type(self).objects.get(pk=self.pk)
+            previous_kind = previous.kind
+            if previous.current_revision_id and (
+                    previous.book_series_id != self.book_series_id or previous.show_id != self.show_id
+            ):
+                raise ValidationError("Нельзя переносить опубликованный Product между родителями.")
             if previous_kind != self.kind and (
-                self.sections.exists() or self.drafts.exists()
+                self.sections.exists() or self.drafts.exists() or self.current_revision_id
             ):
                 raise ValidationError({
                     "kind": "Нельзя менять тип материала с секциями/черновиками.",
@@ -258,3 +276,127 @@ class ContentDraft(Identity):
 
     def __str__(self) -> str:
         return f"Draft: {self.section or self.product}"
+
+
+class ImmutableQuerySet(models.QuerySet):
+    def update(self, **kwargs):
+        raise ValidationError("Опубликованные записи неизменяемы.")
+
+    def delete(self):
+        raise ValidationError("Опубликованные записи нельзя удалять.")
+
+
+class ImmutableRecord(Identity):
+    objects = ImmutableQuerySet.as_manager()
+
+    class Meta:
+        abstract = True
+
+    def save(self, *args, **kwargs):
+        if not self._state.adding:
+            raise ValidationError("Опубликованные записи неизменяемы.")
+        return super().save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        raise ValidationError("Опубликованные записи нельзя удалять.")
+
+
+class PublishedRevision(ImmutableRecord):
+    product = models.ForeignKey(Product, on_delete=models.PROTECT, related_name="revisions")
+    number = models.PositiveIntegerField()
+    schema_version = models.PositiveSmallIntegerField(default=1)
+    full_manifest = models.JSONField()
+    trial_manifest = models.JSONField(null=True)
+    manifest_files = models.JSONField()
+    # Internal identity ledger and complete source snapshot; never public catalog data.
+    source_documents = models.JSONField()
+    identity_map = models.JSONField()
+    content_hash = models.CharField(max_length=64)
+    publication_kind = models.CharField(
+        max_length=10, choices=[("initial", "Initial"), ("correction", "Correction"),
+                                ("extension", "Extension")],
+    )
+    published_at = models.DateTimeField()
+
+    class Meta:
+        ordering = ("product_id", "number")
+        constraints = [
+            models.UniqueConstraint(fields=("product", "number"), name="revision_number_unique"),
+            models.CheckConstraint(condition=Q(number__gt=0), name="revision_number_positive"),
+            models.CheckConstraint(condition=Q(schema_version=1), name="revision_schema_v1"),
+            models.CheckConstraint(
+                condition=Q(publication_kind__in=("initial", "correction", "extension")),
+                name="revision_kind_valid",
+            ),
+        ]
+
+    def __str__(self) -> str:
+        return f"{self.product_id} / v{self.number}"
+
+
+class PackArtifact(ImmutableRecord):
+    revision = models.ForeignKey(PublishedRevision, on_delete=models.PROTECT, related_name="artifacts")
+    scope = models.CharField(max_length=5, choices=[("full", "Full"), ("trial", "Trial")])
+    section = models.ForeignKey(Section, null=True, on_delete=models.PROTECT)
+    object_key = models.CharField(max_length=255)
+    sha256 = models.CharField(max_length=64)
+    byte_size = models.PositiveBigIntegerField()
+    schema_version = models.PositiveSmallIntegerField(default=1)
+
+    class Meta:
+        constraints = [
+            models.CheckConstraint(condition=Q(scope__in=("full", "trial")), name="artifact_scope_valid"),
+            models.CheckConstraint(condition=Q(byte_size__gt=0), name="artifact_size_positive"),
+        ]
+
+
+class CatalogRevision(ImmutableRecord):
+    snapshot = models.JSONField()
+    schema_version = models.PositiveSmallIntegerField(default=1)
+    object_key = models.CharField(max_length=255, unique=True)
+    sha256 = models.CharField(max_length=64)
+    byte_size = models.PositiveBigIntegerField()
+    activated_at = models.DateTimeField()
+
+
+class CatalogHead(models.Model):
+    id = models.PositiveSmallIntegerField(primary_key=True, default=1, editable=False)
+    current_revision = models.ForeignKey(CatalogRevision, null=True, on_delete=models.PROTECT)
+    source_revision = models.PositiveBigIntegerField(default=0)
+
+    class Meta:
+        constraints = [models.CheckConstraint(condition=Q(id=1), name="catalog_head_singleton")]
+
+
+class Lesson(Identity):
+    product = models.ForeignKey(Product, on_delete=models.PROTECT, related_name="lessons")
+    section = models.ForeignKey(Section, null=True, on_delete=models.PROTECT, related_name="lessons")
+    position = models.PositiveIntegerField()
+    retired_at = models.DateTimeField(null=True, editable=False)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=("section", "position"), condition=Q(section__isnull=False),
+                                    name="lesson_section_position_unique"),
+            models.UniqueConstraint(fields=("product", "position"), condition=Q(section__isnull=True),
+                                    name="lesson_movie_position_unique"),
+            models.CheckConstraint(condition=Q(position__gt=0), name="lesson_position_positive"),
+        ]
+
+
+class LearningItem(Identity):
+    product = models.ForeignKey(Product, on_delete=models.PROTECT, related_name="items")
+    lesson = models.ForeignKey(Lesson, on_delete=models.PROTECT, related_name="items")
+    position = models.PositiveSmallIntegerField()
+    sense_key = models.CharField(max_length=255)
+    en = models.TextField()
+    ru = models.TextField()
+    retired_at = models.DateTimeField(null=True, editable=False)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=("product", "sense_key"), name="item_product_sense_unique"),
+            models.UniqueConstraint(fields=("lesson", "position"), name="item_lesson_position_unique",
+                                    deferrable=models.Deferrable.DEFERRED),
+            models.CheckConstraint(condition=Q(position__gte=1, position__lte=5), name="item_position_1_to_5"),
+        ]

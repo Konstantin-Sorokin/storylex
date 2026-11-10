@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "apps.accounts.apps.AccountsConfig",
     "apps.content.apps.ContentConfig",
+    "apps.feedback.apps.FeedbackConfig",
 ]
 
 MIDDLEWARE = [
@@ -90,6 +91,10 @@ USE_I18N = True
 USE_TZ = True
 STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+CONTENT_STORAGE_ROOT = Path(os.environ.get("CONTENT_STORAGE_ROOT") or BASE_DIR / ".content-storage")
+# Uploaded source is limited before parsing; Django may spool it to a private temp file.
+DATA_UPLOAD_MAX_MEMORY_SIZE = 11 * 1024 * 1024
 
 # No API routes yet; future views must explicitly open public access.
 REST_FRAMEWORK = {
