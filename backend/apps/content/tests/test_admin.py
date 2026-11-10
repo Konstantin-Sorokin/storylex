@@ -19,6 +19,7 @@ class CatalogAdminTests(TestCase):
             "title_ru": "Книга", "title_en": "Book", "year": "2026",
             "cefr_min": "A2", "cefr_max": "B1",
             "access_mode": "free", "price_minor": "0", "_save": "Save",
+            "availability": "available",
         }
         data.update(changes)
         return data

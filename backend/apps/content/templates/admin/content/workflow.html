@@ -1,0 +1,21 @@
+{% extends "admin/base_site.html" %}
+{% block content %}
+<p>{{ description }}</p>
+{% if workflow_error %}<p class="errornote">{{ workflow_error }}</p>{% endif %}
+<p><a href="{{ back_url }}">Вернуться к объекту: {{ original }}</a></p>
+{% if captured %}
+  <p>Редакционная ревизия: {{ captured.source_revision }}. Текущий каталог: {{ captured.head_id|default:"нет" }}.</p>
+  <p>Текущая учебная ревизия: {{ captured.previous.number|default:"нет" }}. Новых уроков: {{ added_lessons }}.</p>
+  <h2>Изменения: metadata и SHA-256 documents, before → after</h2>
+  <pre style="white-space:pre-wrap">{{ review_diff }}</pre>
+  <h2>Метаданные, которые войдут в каталог</h2>
+  <pre style="white-space:pre-wrap">{{ captured.entry }}</pre>
+  <h2>Связанные метаданные (автор / серия / сериал)</h2>
+  <pre style="white-space:pre-wrap">{{ captured.related }}</pre>
+  <p>SHA-256 учебного состава: {{ captured.content_hash }}. Полноту произведения и смысл упражнений подтверждает автор.</p>
+{% endif %}
+{% if form %}<form method="post" enctype="multipart/form-data">{% csrf_token %}
+  {{ form.as_p }}
+  <input type="submit" value="Подтвердить" class="default">
+</form>{% endif %}
+{% endblock %}

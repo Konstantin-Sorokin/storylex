@@ -1,0 +1,7 @@
+{% extends "admin/change_form.html" %}
+{% block object-tools-items %}
+  {% if content_import_url %}<li><a href="{{ content_import_url }}">Импорт JSON</a></li>{% endif %}
+  {% if content_publish_url %}<li><a href="{{ content_publish_url }}">Опубликовать полный материал</a></li>{% endif %}
+  {% if content_metadata_url %}<li><a href="{{ content_metadata_url }}">Опубликовать метаданные</a></li>{% endif %}
+  {{ block.super }}
+{% endblock %}
