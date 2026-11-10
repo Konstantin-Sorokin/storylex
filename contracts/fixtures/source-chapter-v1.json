@@ -1,0 +1,553 @@
+{
+  "schema_version": 1,
+  "product_id": "439bdd12-9f95-5993-a113-e75aaff65dbd",
+  "scope": "chapter",
+  "section_id": "7ae82321-5029-5e59-b987-288a41bacb36",
+  "title": {
+    "ru": "Ночная прогулка",
+    "en": "A Night Walk"
+  },
+  "lessons": [
+    {
+      "id": "71ef6131-4d99-54bb-86cf-b65922bf6c02",
+      "position": 1,
+      "items": [
+        {
+          "id": "9e991dcf-5516-542b-8b63-398e5bfdc54d",
+          "sense_key": "gather.example",
+          "kind": "word",
+          "en": "gather",
+          "ru": "собираться",
+          "example": {
+            "en": [
+              {
+                "text": "We ",
+                "target": false
+              },
+              {
+                "text": "gather",
+                "target": true
+              },
+              {
+                "text": " near the gate.",
+                "target": false
+              }
+            ],
+            "ru": [
+              {
+                "text": "Мы ",
+                "target": false
+              },
+              {
+                "text": "собираемся",
+                "target": true
+              },
+              {
+                "text": " у ворот.",
+                "target": false
+              }
+            ]
+          },
+          "exercises": {
+            "word_to_translation": {
+              "id": "d756c9c7-eb6e-5d3a-b204-b93033cf558f",
+              "prompt": "gather",
+              "options": [
+                {
+                  "id": "48f53e0e-1412-5ec4-b318-159e4a966562",
+                  "text": "собираться"
+                },
+                {
+                  "id": "eddaeafc-a176-5dc3-afc2-b2300b1d3ba5",
+                  "text": "оставаться"
+                },
+                {
+                  "id": "c79beb58-efcc-5e1b-b2c0-7cb5b60f6032",
+                  "text": "спешить"
+                },
+                {
+                  "id": "144a28ae-3dd3-5835-8f3d-bd24f8d7d399",
+                  "text": "уходить"
+                }
+              ],
+              "correct_option_id": "48f53e0e-1412-5ec4-b318-159e4a966562"
+            },
+            "context_ru_to_en": {
+              "id": "a4f17c78-76fe-5114-98a8-54bd2e1660cf",
+              "prompt": "Мы собираемся у ворот.",
+              "options": [
+                {
+                  "id": "58423ac3-d07b-57a7-87ed-43817636d4be",
+                  "text": "We gather near the gate."
+                },
+                {
+                  "id": "2ac168d8-5dcf-575a-9798-659012cd35ec",
+                  "text": "We gather after lunch."
+                },
+                {
+                  "id": "d360aa03-0451-5a8d-ae4f-f34da1ed588e",
+                  "text": "We gather in the kitchen."
+                },
+                {
+                  "id": "20cefab7-6bea-5450-a7cc-ca1471397617",
+                  "text": "We gather every Monday."
+                }
+              ],
+              "correct_option_id": "58423ac3-d07b-57a7-87ed-43817636d4be"
+            },
+            "context_en_to_ru": {
+              "id": "7bfd4984-da10-502d-845a-48640b21b9f7",
+              "prompt": "We gather near the gate.",
+              "options": [
+                {
+                  "id": "a375b5da-8a73-53e0-be19-5bfdd688d966",
+                  "text": "Мы собираемся у ворот."
+                },
+                {
+                  "id": "b2ff211e-fe26-536b-95ac-b1ffea3e9915",
+                  "text": "Мы ждём у ворот."
+                },
+                {
+                  "id": "6f289077-de60-526e-b02f-7139a7b97e6d",
+                  "text": "Мы уходим от ворот."
+                },
+                {
+                  "id": "abb9c13d-2e5c-58ab-9221-114156426f95",
+                  "text": "Мы закрываем ворота."
+                }
+              ],
+              "correct_option_id": "a375b5da-8a73-53e0-be19-5bfdd688d966"
+            }
+          }
+        },
+        {
+          "id": "abaf21be-8573-5674-ba55-cec3351a9460",
+          "sense_key": "lantern.example",
+          "kind": "word",
+          "en": "lantern",
+          "ru": "фонарь",
+          "example": {
+            "en": [
+              {
+                "text": "The ",
+                "target": false
+              },
+              {
+                "text": "lantern",
+                "target": true
+              },
+              {
+                "text": " is on the table.",
+                "target": false
+              }
+            ],
+            "ru": [
+              {
+                "text": "Фонарь",
+                "target": true
+              },
+              {
+                "text": " стоит на столе.",
+                "target": false
+              }
+            ]
+          },
+          "exercises": {
+            "word_to_translation": {
+              "id": "dc3a16bd-b7be-5b43-b962-c628869b2c62",
+              "prompt": "lantern",
+              "options": [
+                {
+                  "id": "d556cf50-84b2-58af-be17-30c23b9af1b9",
+                  "text": "фонарь"
+                },
+                {
+                  "id": "5c974eaf-7886-5e57-b369-b93b149b2b7d",
+                  "text": "ворота"
+                },
+                {
+                  "id": "8c89869a-7fc6-57ea-85b4-2a30f2224cd9",
+                  "text": "тропа"
+                },
+                {
+                  "id": "52b96d0b-05f1-5b9a-b81c-dfd458a4f2de",
+                  "text": "скамейка"
+                }
+              ],
+              "correct_option_id": "d556cf50-84b2-58af-be17-30c23b9af1b9"
+            },
+            "context_ru_to_en": {
+              "id": "4b179277-3fec-555b-9228-cf2936169893",
+              "prompt": "Фонарь стоит на столе.",
+              "options": [
+                {
+                  "id": "65652647-8a54-5787-91e4-1f0451f82f34",
+                  "text": "The lantern is on the table."
+                },
+                {
+                  "id": "30dd82e4-a032-5876-9ed0-8b653d06d88a",
+                  "text": "The lantern is under the chair."
+                },
+                {
+                  "id": "bb8c9a5c-a6b4-5f7e-ae03-a6eb80ca7067",
+                  "text": "The lantern is in the bag."
+                },
+                {
+                  "id": "6466318e-2c41-5c29-9de1-115de65811b1",
+                  "text": "The lantern is beside the window."
+                }
+              ],
+              "correct_option_id": "65652647-8a54-5787-91e4-1f0451f82f34"
+            },
+            "context_en_to_ru": {
+              "id": "a299f5d1-d428-5c2b-b338-1e0b8e939bfe",
+              "prompt": "The lantern is on the table.",
+              "options": [
+                {
+                  "id": "dafecc0c-52ff-58f6-9d98-eba2b2949ead",
+                  "text": "Фонарь стоит на столе."
+                },
+                {
+                  "id": "faadd1fa-aa04-5497-870f-a9ceb3f6a3a3",
+                  "text": "Фонарь лежит под стулом."
+                },
+                {
+                  "id": "7825f9a7-82a1-5cd4-b8cd-a291364ecd30",
+                  "text": "Фонарь находится в сумке."
+                },
+                {
+                  "id": "8cff063a-97e1-5a3c-8ce6-0a8c0147b263",
+                  "text": "Фонарь стоит у окна."
+                }
+              ],
+              "correct_option_id": "dafecc0c-52ff-58f6-9d98-eba2b2949ead"
+            }
+          }
+        },
+        {
+          "id": "f3d1c71c-53d5-5eba-9e6e-af34c4b030d9",
+          "sense_key": "path.example",
+          "kind": "word",
+          "en": "path",
+          "ru": "тропа",
+          "example": {
+            "en": [
+              {
+                "text": "The ",
+                "target": false
+              },
+              {
+                "text": "path",
+                "target": true
+              },
+              {
+                "text": " leads to the river.",
+                "target": false
+              }
+            ],
+            "ru": [
+              {
+                "text": "Тропа",
+                "target": true
+              },
+              {
+                "text": " ведёт к реке.",
+                "target": false
+              }
+            ]
+          },
+          "exercises": {
+            "word_to_translation": {
+              "id": "5fa498dd-1c09-593e-bbe5-7e9224d9c4ed",
+              "prompt": "path",
+              "options": [
+                {
+                  "id": "17bde97f-826c-5937-87ec-37128f75cded",
+                  "text": "тропа"
+                },
+                {
+                  "id": "2ee87b86-f0b2-5289-83ef-8e5eaed5f752",
+                  "text": "мост"
+                },
+                {
+                  "id": "522d8754-1a2c-57dc-97ef-4516905f4e52",
+                  "text": "берег"
+                },
+                {
+                  "id": "40581900-b2d8-5656-a2ff-2fec91f7ed92",
+                  "text": "забор"
+                }
+              ],
+              "correct_option_id": "17bde97f-826c-5937-87ec-37128f75cded"
+            },
+            "context_ru_to_en": {
+              "id": "97570fa3-208a-5ba6-8121-737fb5dfff1f",
+              "prompt": "Тропа ведёт к реке.",
+              "options": [
+                {
+                  "id": "987b11c2-f7ab-5184-80bc-01754088b1eb",
+                  "text": "The path leads to the river."
+                },
+                {
+                  "id": "ce338c10-4851-549f-a80a-3270ea3b4270",
+                  "text": "The path leads to the station."
+                },
+                {
+                  "id": "fc2461bc-0950-51cd-9408-a5cef3768513",
+                  "text": "The path ends at the gate."
+                },
+                {
+                  "id": "cc46337d-f77f-5a22-9079-b87ceef46b11",
+                  "text": "The path follows the fence."
+                }
+              ],
+              "correct_option_id": "987b11c2-f7ab-5184-80bc-01754088b1eb"
+            },
+            "context_en_to_ru": {
+              "id": "e947864e-2710-578f-9655-2f153ed09d02",
+              "prompt": "The path leads to the river.",
+              "options": [
+                {
+                  "id": "568b6555-3cc3-507c-9dc3-d6db6f49b5da",
+                  "text": "Тропа ведёт к реке."
+                },
+                {
+                  "id": "b42a1b43-2279-530a-9416-85b2b7c23de4",
+                  "text": "Тропа ведёт к станции."
+                },
+                {
+                  "id": "48891bd0-9f52-5e70-b21a-deb6ee01134e",
+                  "text": "Тропа заканчивается у ворот."
+                },
+                {
+                  "id": "58f7bea7-39b2-5f00-aef0-51f5ed1eb313",
+                  "text": "Тропа идёт вдоль забора."
+                }
+              ],
+              "correct_option_id": "568b6555-3cc3-507c-9dc3-d6db6f49b5da"
+            }
+          }
+        },
+        {
+          "id": "402ac9c8-7d54-52b0-bcdd-8100da219e56",
+          "sense_key": "quiet.example",
+          "kind": "word",
+          "en": "quiet",
+          "ru": "тихий",
+          "example": {
+            "en": [
+              {
+                "text": "The garden is ",
+                "target": false
+              },
+              {
+                "text": "quiet",
+                "target": true
+              },
+              {
+                "text": " at night.",
+                "target": false
+              }
+            ],
+            "ru": [
+              {
+                "text": "Ночью сад ",
+                "target": false
+              },
+              {
+                "text": "тихий",
+                "target": true
+              },
+              {
+                "text": ".",
+                "target": false
+              }
+            ]
+          },
+          "exercises": {
+            "word_to_translation": {
+              "id": "5fe14ae6-0798-5aa7-8138-a37a69e47d1e",
+              "prompt": "quiet",
+              "options": [
+                {
+                  "id": "39175074-61ce-5399-b442-4251372b155a",
+                  "text": "тихий"
+                },
+                {
+                  "id": "4fb97222-e85a-527d-b267-8c46ccab353d",
+                  "text": "тёмный"
+                },
+                {
+                  "id": "ff34671c-803a-5b19-955b-72003cb7d25b",
+                  "text": "узкий"
+                },
+                {
+                  "id": "1e218b5d-63c8-5adc-866f-c25c509440e9",
+                  "text": "пустой"
+                }
+              ],
+              "correct_option_id": "39175074-61ce-5399-b442-4251372b155a"
+            },
+            "context_ru_to_en": {
+              "id": "45feac1b-d6d2-5e49-8284-fa22c332040d",
+              "prompt": "Ночью сад тихий.",
+              "options": [
+                {
+                  "id": "f19cc412-30a0-5c55-a56a-a4846f7b8dc5",
+                  "text": "The garden is quiet at night."
+                },
+                {
+                  "id": "c794050b-f975-55bc-b419-311c925092e9",
+                  "text": "The street is quiet in the morning."
+                },
+                {
+                  "id": "38eb1995-ca47-5c1c-bddc-3c5fa7f300fe",
+                  "text": "The kitchen is quiet after lunch."
+                },
+                {
+                  "id": "50e06752-dd05-5722-bdc1-3f2c3db23635",
+                  "text": "The house is quiet on Sundays."
+                }
+              ],
+              "correct_option_id": "f19cc412-30a0-5c55-a56a-a4846f7b8dc5"
+            },
+            "context_en_to_ru": {
+              "id": "98ee31f8-208f-5816-8ab5-94304826701b",
+              "prompt": "The garden is quiet at night.",
+              "options": [
+                {
+                  "id": "b2d8ea1a-081e-5dbb-b74c-0285371c9c9f",
+                  "text": "Ночью сад тихий."
+                },
+                {
+                  "id": "d530a75a-e781-586c-94ff-7c979fb839f7",
+                  "text": "По утрам улица тихая."
+                },
+                {
+                  "id": "4fcb070f-654b-5fd7-b3e9-0cd15ff66d6b",
+                  "text": "После обеда на кухне тихо."
+                },
+                {
+                  "id": "fd2a10a9-fcac-56f5-9006-61a2782ca18d",
+                  "text": "По воскресеньям в доме тихо."
+                }
+              ],
+              "correct_option_id": "b2d8ea1a-081e-5dbb-b74c-0285371c9c9f"
+            }
+          }
+        },
+        {
+          "id": "ea79871e-28c0-5085-b846-96bb78914717",
+          "sense_key": "return.example",
+          "kind": "word",
+          "en": "return",
+          "ru": "возвращаться",
+          "example": {
+            "en": [
+              {
+                "text": "We ",
+                "target": false
+              },
+              {
+                "text": "return",
+                "target": true
+              },
+              {
+                "text": " before sunset.",
+                "target": false
+              }
+            ],
+            "ru": [
+              {
+                "text": "Мы ",
+                "target": false
+              },
+              {
+                "text": "возвращаемся",
+                "target": true
+              },
+              {
+                "text": " до заката.",
+                "target": false
+              }
+            ]
+          },
+          "exercises": {
+            "word_to_translation": {
+              "id": "36d7957a-2021-5129-9b3d-0ed76ef684b6",
+              "prompt": "return",
+              "options": [
+                {
+                  "id": "77e975f7-728b-5e34-97bc-16aa51108ec6",
+                  "text": "возвращаться"
+                },
+                {
+                  "id": "526d1242-39cf-5d48-a9d5-e6e1affde1ac",
+                  "text": "прощаться"
+                },
+                {
+                  "id": "9ede745a-6e1d-5d86-b0bf-61c6213c7033",
+                  "text": "путешествовать"
+                },
+                {
+                  "id": "11137789-3ebe-53eb-ba0c-7a2027641bdf",
+                  "text": "отдыхать"
+                }
+              ],
+              "correct_option_id": "77e975f7-728b-5e34-97bc-16aa51108ec6"
+            },
+            "context_ru_to_en": {
+              "id": "6a9c38d3-6741-5b6d-bbb2-7bb070ea4c6c",
+              "prompt": "Мы возвращаемся до заката.",
+              "options": [
+                {
+                  "id": "26990ecd-619d-52bd-904e-fdc9c7229eb7",
+                  "text": "We return before sunset."
+                },
+                {
+                  "id": "ce2e13c5-a43d-5a22-8c99-d7d6fc905a05",
+                  "text": "We return after breakfast."
+                },
+                {
+                  "id": "c4b8a192-0e0a-5668-9b14-e6ebb445536d",
+                  "text": "We return every Friday."
+                },
+                {
+                  "id": "cac1d330-d01a-55c9-b4aa-045037e40d43",
+                  "text": "We return by train."
+                }
+              ],
+              "correct_option_id": "26990ecd-619d-52bd-904e-fdc9c7229eb7"
+            },
+            "context_en_to_ru": {
+              "id": "74180b22-6e75-5452-8233-830da9fd42ae",
+              "prompt": "We return before sunset.",
+              "options": [
+                {
+                  "id": "0fcb7b83-c795-5b21-a928-375407fef12a",
+                  "text": "Мы возвращаемся до заката."
+                },
+                {
+                  "id": "8cc9f945-0d8c-58cf-8206-ec4bd4a7cb2c",
+                  "text": "Мы возвращаемся после завтрака."
+                },
+                {
+                  "id": "e78eda42-5f2d-52be-a40d-0417c42ccb85",
+                  "text": "Мы возвращаемся каждую пятницу."
+                },
+                {
+                  "id": "615a9999-88d6-588a-aef2-ac4be5f0e1d6",
+                  "text": "Мы возвращаемся на поезде."
+                }
+              ],
+              "correct_option_id": "0fcb7b83-c795-5b21-a928-375407fef12a"
+            }
+          }
+        }
+      ],
+      "pairs": {
+        "id": "c79e1136-83c2-543c-bbe1-7aa65a1a3d98"
+      }
+    }
+  ]
+}

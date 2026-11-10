@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Storylex source content v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "product_id", "scope", "section_id", "title", "lessons"],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "product_id": { "$ref": "#/$defs/id" },
+    "scope": { "enum": ["chapter", "episode", "movie"] },
+    "section_id": { "type": ["string", "null"], "format": "uuid" },
+    "title": { "$ref": "#/$defs/localized" },
+    "lessons": {
+      "type": "array", "minItems": 1,
+      "items": { "$ref": "#/$defs/lesson" }
+    }
+  },
+  "$defs": {
+    "id": { "type": "string", "format": "uuid" },
+    "text": { "type": "string", "minLength": 1 },
+    "localized": {
+      "type": "object", "additionalProperties": false,
+      "required": ["ru", "en"],
+      "properties": {
+        "ru": { "$ref": "#/$defs/text" },
+        "en": { "$ref": "#/$defs/text" }
+      }
+    },
+    "segment": {
+      "type": "object", "additionalProperties": false,
+      "required": ["text", "target"],
+      "properties": {
+        "text": { "$ref": "#/$defs/text" },
+        "target": { "type": "boolean" }
+      }
+    },
+    "richText": {
+      "type": "array", "minItems": 1,
+      "items": { "$ref": "#/$defs/segment" }
+    },
+    "example": {
+      "type": "object", "additionalProperties": false,
+      "required": ["en", "ru"],
+      "properties": {
+        "en": { "$ref": "#/$defs/richText" },
+        "ru": { "$ref": "#/$defs/richText" }
+      }
+    },
+    "option": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "text"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "text": { "$ref": "#/$defs/text" }
+      }
+    },
+    "question": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "prompt", "options", "correct_option_id"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "prompt": { "$ref": "#/$defs/text" },
+        "options": {
+          "type": "array", "minItems": 4, "maxItems": 4,
+          "items": { "$ref": "#/$defs/option" }
+        },
+        "correct_option_id": { "$ref": "#/$defs/id" }
+      }
+    },
+    "exercises": {
+      "type": "object", "additionalProperties": false,
+      "required": ["word_to_translation", "context_ru_to_en", "context_en_to_ru"],
+      "properties": {
+        "word_to_translation": { "$ref": "#/$defs/question" },
+        "context_ru_to_en": { "$ref": "#/$defs/question" },
+        "context_en_to_ru": { "$ref": "#/$defs/question" }
+      }
+    },
+    "item": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "sense_key", "kind", "en", "ru", "example", "exercises"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "sense_key": { "$ref": "#/$defs/text" },
+        "kind": { "enum": ["word", "phrasal_verb", "expression", "grammar"] },
+        "en": { "$ref": "#/$defs/text" },
+        "ru": { "$ref": "#/$defs/text" },
+        "example": { "$ref": "#/$defs/example" },
+        "exercises": { "$ref": "#/$defs/exercises" }
+      }
+    },
+    "lesson": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "position", "items", "pairs"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "position": { "type": "integer", "minimum": 1 },
+        "items": {
+          "type": "array", "minItems": 5, "maxItems": 5,
+          "items": { "$ref": "#/$defs/item" }
+        },
+        "pairs": {
+          "type": "object", "additionalProperties": false,
+          "required": ["id"],
+          "properties": { "id": { "$ref": "#/$defs/id" } }
+        }
+      }
+    }
+  }
+}
