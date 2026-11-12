@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Storylex catalogue snapshot v1",
+  "type": "object",
+  "required": ["schema_version", "catalog_revision", "products", "book_series", "shows"],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "catalog_revision": { "$ref": "#/$defs/id" },
+    "products": { "type": "array", "items": { "$ref": "#/$defs/product" } },
+    "book_series": { "type": "array", "items": { "type": "object" } },
+    "shows": { "type": "array", "items": { "type": "object" } }
+  },
+  "$defs": {
+    "id": { "type": "string", "format": "uuid" },
+    "localized": {
+      "type": "object", "required": ["ru", "en"],
+      "properties": { "ru": { "type": "string" }, "en": { "type": "string" } }
+    },
+    "product": {
+      "type": "object",
+      "required": ["id", "kind", "title", "description", "year", "author", "trial_enabled", "availability", "revision_id", "revision_number", "sections", "counts"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "kind": { "enum": ["book", "season", "movie"] },
+        "title": { "$ref": "#/$defs/localized" },
+        "description": { "$ref": "#/$defs/localized" },
+        "year": { "type": "integer" },
+        "author": {
+          "anyOf": [
+            { "type": "null" },
+            {
+              "type": "object", "required": ["id", "name_ru", "name_en"],
+              "properties": { "id": { "$ref": "#/$defs/id" }, "name_ru": { "type": "string" }, "name_en": { "type": "string" } }
+            }
+          ]
+        },
+        "trial_enabled": { "type": "boolean" },
+        "availability": { "enum": ["available", "blocked"] },
+        "revision_id": { "$ref": "#/$defs/id" },
+        "revision_number": { "type": "integer", "minimum": 1 },
+        "counts": {
+          "type": "object", "required": ["sections", "lessons", "items"],
+          "properties": { "sections": { "type": "integer", "minimum": 0 }, "lessons": { "type": "integer", "minimum": 1 }, "items": { "type": "integer", "minimum": 5 } }
+        },
+        "sections": {
+          "type": "array", "items": {
+            "type": "object", "required": ["id", "kind", "position", "title"],
+            "properties": { "id": { "$ref": "#/$defs/id" }, "kind": { "enum": ["chapter", "episode"] }, "position": { "type": "integer", "minimum": 1 }, "title": { "$ref": "#/$defs/localized" } }
+          }
+        }
+      }
+    }
+  }
+}

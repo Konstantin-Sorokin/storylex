@@ -1,0 +1,561 @@
+{
+  "schema_version": 1,
+  "product_id": "4774f22c-620c-4d3e-b31c-80cb9a32deb8",
+  "scope": "chapter",
+  "section_id": "f7b50578-49f0-4577-b8fa-096fabafa658",
+  "title": {
+    "ru": "Глава 1",
+    "en": "Chapter 1"
+  },
+  "lessons": [
+    {
+      "id": "219f389b-26fa-4712-8fb3-ecfffe8d439b",
+      "position": 1,
+      "items": [
+        {
+          "id": "89d57abf-63f4-4f9b-a181-e5df06f8f0ae",
+          "sense_key": "hole.pit-in-ground",
+          "kind": "word",
+          "en": "hole",
+          "ru": "яма",
+          "example": {
+            "en": [
+              {
+                "text": "There is a deep ",
+                "target": false
+              },
+              {
+                "text": "hole",
+                "target": true
+              },
+              {
+                "text": " beside the road.",
+                "target": false
+              }
+            ],
+            "ru": [
+              {
+                "text": "Возле дороги есть глубокая ",
+                "target": false
+              },
+              {
+                "text": "яма",
+                "target": true
+              },
+              {
+                "text": ".",
+                "target": false
+              }
+            ]
+          },
+          "exercises": {
+            "word_to_translation": {
+              "id": "e24a833f-52bc-445e-b8fa-e751f34b82c3",
+              "prompt": "hole",
+              "options": [
+                {
+                  "id": "48d66d2d-dd79-4a23-89e4-31173359ee3c",
+                  "text": "тропа"
+                },
+                {
+                  "id": "303c4d1b-a716-4b13-a7dd-c33505469e87",
+                  "text": "яма"
+                },
+                {
+                  "id": "55039499-1f39-4a6a-9c27-a9dc99948673",
+                  "text": "лужа"
+                },
+                {
+                  "id": "345cc9b5-bd46-4e4f-83cb-a038f91ca46a",
+                  "text": "скала"
+                }
+              ],
+              "correct_option_id": "303c4d1b-a716-4b13-a7dd-c33505469e87"
+            },
+            "context_ru_to_en": {
+              "id": "5aa24e87-c3e3-471c-9e0e-df895ebc9d13",
+              "prompt": "Утром мы нашли яму возле реки.",
+              "options": [
+                {
+                  "id": "5aad500a-39f5-4b38-b5ea-bcc38bb06f6b",
+                  "text": "In the evening, we found a hole near the river."
+                },
+                {
+                  "id": "f593d961-506d-41fa-a445-b4dc336f0518",
+                  "text": "In the morning, we found a hole near the forest."
+                },
+                {
+                  "id": "e426e6e4-1ac4-420e-9d9b-b054d7a75024",
+                  "text": "In the morning, we found a hole near the river."
+                },
+                {
+                  "id": "9e0c341a-3b1f-4632-a2bd-74b5297dd607",
+                  "text": "In the morning, we filled a hole near the river."
+                }
+              ],
+              "correct_option_id": "e426e6e4-1ac4-420e-9d9b-b054d7a75024"
+            },
+            "context_en_to_ru": {
+              "id": "f0ef00cc-0aa9-4f80-ae33-9e3da189f75b",
+              "prompt": "There is a deep hole beside the road.",
+              "options": [
+                {
+                  "id": "e124cb08-89b3-4d03-aa35-433965b47bd1",
+                  "text": "Возле дороги есть глубокая яма."
+                },
+                {
+                  "id": "e9847340-0d71-41de-b0bb-23a7af6e0aaa",
+                  "text": "Возле реки есть глубокая яма."
+                },
+                {
+                  "id": "4087cef3-346d-4e3f-a720-92498e39a322",
+                  "text": "Посреди дороги есть неглубокая яма."
+                },
+                {
+                  "id": "6e12a671-9ff9-4ed7-a05b-d8e56bc3ee80",
+                  "text": "Возле дороги больше нет ямы."
+                }
+              ],
+              "correct_option_id": "e124cb08-89b3-4d03-aa35-433965b47bd1"
+            }
+          }
+        },
+        {
+          "id": "fec14f0f-499b-4029-907b-1898c27b7cd7",
+          "sense_key": "tunnel.underground-passage",
+          "kind": "word",
+          "en": "tunnel",
+          "ru": "туннель",
+          "example": {
+            "en": [
+              {
+                "text": "The train entered a dark ",
+                "target": false
+              },
+              {
+                "text": "tunnel",
+                "target": true
+              },
+              {
+                "text": " after the station.",
+                "target": false
+              }
+            ],
+            "ru": [
+              {
+                "text": "Поезд въехал в тёмный ",
+                "target": false
+              },
+              {
+                "text": "туннель",
+                "target": true
+              },
+              {
+                "text": " после станции.",
+                "target": false
+              }
+            ]
+          },
+          "exercises": {
+            "word_to_translation": {
+              "id": "66f898b6-1f9d-4b78-9bf7-a9bf7a7ae6d3",
+              "prompt": "tunnel",
+              "options": [
+                {
+                  "id": "819d2eea-0d38-4006-90c6-0c41c003a48e",
+                  "text": "мост"
+                },
+                {
+                  "id": "0e4b42cf-06b4-40b0-a724-5e6ab3bf17ae",
+                  "text": "башня"
+                },
+                {
+                  "id": "4e41055e-5be9-4e21-ac9e-4de9e4db8907",
+                  "text": "площадь"
+                },
+                {
+                  "id": "9896f5c3-7ff3-4b67-8b45-6cab5b896cde",
+                  "text": "туннель"
+                }
+              ],
+              "correct_option_id": "9896f5c3-7ff3-4b67-8b45-6cab5b896cde"
+            },
+            "context_ru_to_en": {
+              "id": "c1cc28f3-5365-4056-afb3-109c4ac8ba81",
+              "prompt": "Этот узкий туннель ведёт к озеру.",
+              "options": [
+                {
+                  "id": "bf7255d2-2c92-4543-b101-ec0ab71309a5",
+                  "text": "This wide tunnel leads to the lake."
+                },
+                {
+                  "id": "c6535ce0-0916-4d14-bc2b-e0e518b36e97",
+                  "text": "This narrow tunnel leads to the lake."
+                },
+                {
+                  "id": "c50ccc0d-a45a-48eb-9c7b-81cabb675bc6",
+                  "text": "This narrow tunnel leads to the village."
+                },
+                {
+                  "id": "66f51222-45d2-4f8a-b8c8-a7c036b3310f",
+                  "text": "This narrow tunnel leads away from the lake."
+                }
+              ],
+              "correct_option_id": "c6535ce0-0916-4d14-bc2b-e0e518b36e97"
+            },
+            "context_en_to_ru": {
+              "id": "b291db96-004b-448a-b43a-889e789f08b3",
+              "prompt": "The train entered a dark tunnel after the station.",
+              "options": [
+                {
+                  "id": "93467ec9-0af7-4cee-8e5e-408860201398",
+                  "text": "Поезд въехал в светлый туннель перед станцией."
+                },
+                {
+                  "id": "d737dda5-ea02-4f29-b5b2-28ba2ea2f80b",
+                  "text": "Автобус въехал в тёмный туннель после станции."
+                },
+                {
+                  "id": "8640232e-2fdd-4fbe-81fa-eb49449670b3",
+                  "text": "Поезд въехал в тёмный туннель после станции."
+                },
+                {
+                  "id": "07ea0a1d-8bea-4141-bba0-fdefce43e025",
+                  "text": "Поезд выехал из тёмного туннеля перед станцией."
+                }
+              ],
+              "correct_option_id": "8640232e-2fdd-4fbe-81fa-eb49449670b3"
+            }
+          }
+        },
+        {
+          "id": "129d94d9-3896-4a2c-b10e-90b45935d9a9",
+          "sense_key": "comfortable.physically-relaxing",
+          "kind": "word",
+          "en": "comfortable",
+          "ru": "удобный",
+          "example": {
+            "en": [
+              {
+                "text": "This chair is ",
+                "target": false
+              },
+              {
+                "text": "comfortable",
+                "target": true
+              },
+              {
+                "text": " enough for a long evening of reading.",
+                "target": false
+              }
+            ],
+            "ru": [
+              {
+                "text": "Этот стул достаточно ",
+                "target": false
+              },
+              {
+                "text": "удобный",
+                "target": true
+              },
+              {
+                "text": ", чтобы провести за чтением весь вечер.",
+                "target": false
+              }
+            ]
+          },
+          "exercises": {
+            "word_to_translation": {
+              "id": "09632c5a-80c1-4169-b5ae-188459c2ce47",
+              "prompt": "comfortable",
+              "options": [
+                {
+                  "id": "fe5eae34-f4fb-4f56-a7a5-bec3a178766c",
+                  "text": "удобный"
+                },
+                {
+                  "id": "2cb217a6-eab3-4b76-a563-6b35039cf669",
+                  "text": "скользкий"
+                },
+                {
+                  "id": "1b8b0338-513a-4b1d-a80a-f141210664ae",
+                  "text": "хрупкий"
+                },
+                {
+                  "id": "b98c1da8-2c0d-468d-9b7b-5e19eaf5acbe",
+                  "text": "тяжёлый"
+                }
+              ],
+              "correct_option_id": "fe5eae34-f4fb-4f56-a7a5-bec3a178766c"
+            },
+            "context_ru_to_en": {
+              "id": "a20cabf1-a219-4e0e-b322-900ba335b9cd",
+              "prompt": "Мы купили удобный диван для маленькой комнаты.",
+              "options": [
+                {
+                  "id": "6985da90-6f4e-4741-baaf-90782f074072",
+                  "text": "We sold a comfortable sofa from the small room."
+                },
+                {
+                  "id": "6cdb4a43-0735-4cb9-8fc8-3a9907e057a0",
+                  "text": "We bought a comfortable bed for the small room."
+                },
+                {
+                  "id": "f781507c-5ed8-4b46-95ed-334a9fbd1ca0",
+                  "text": "We bought a comfortable sofa for the large room."
+                },
+                {
+                  "id": "9904d943-ebd6-44d3-b549-ef5115a965c6",
+                  "text": "We bought a comfortable sofa for the small room."
+                }
+              ],
+              "correct_option_id": "9904d943-ebd6-44d3-b549-ef5115a965c6"
+            },
+            "context_en_to_ru": {
+              "id": "128af072-7bb0-4c04-bdb6-e8b835bc8b76",
+              "prompt": "This chair is comfortable enough for a long evening of reading.",
+              "options": [
+                {
+                  "id": "d1281a0f-2d51-40a6-bd9a-2bb22b0f3cbb",
+                  "text": "Этот стул слишком неудобный, чтобы читать весь вечер."
+                },
+                {
+                  "id": "578b5466-a27e-4258-ad81-87d30778e2f9",
+                  "text": "Этот стул достаточно удобный, чтобы провести за чтением весь вечер."
+                },
+                {
+                  "id": "900d2ce2-d6ba-46ae-9acc-690583c9cbf8",
+                  "text": "Это кресло слишком тяжёлое, чтобы перенести его в другую комнату."
+                },
+                {
+                  "id": "cb95ad73-2d16-4f77-b296-113d84a27ec2",
+                  "text": "На этом диване можно удобно проспать всю ночь."
+                }
+              ],
+              "correct_option_id": "578b5466-a27e-4258-ad81-87d30778e2f9"
+            }
+          }
+        },
+        {
+          "id": "8ec9546c-2fa6-4844-bb20-6b63ca13cbcd",
+          "sense_key": "visitor.person-visiting",
+          "kind": "word",
+          "en": "visitor",
+          "ru": "посетитель",
+          "example": {
+            "en": [
+              {
+                "text": "A ",
+                "target": false
+              },
+              {
+                "text": "visitor",
+                "target": true
+              },
+              {
+                "text": " left a blue umbrella by the museum door.",
+                "target": false
+              }
+            ],
+            "ru": [
+              {
+                "text": "Один ",
+                "target": false
+              },
+              {
+                "text": "посетитель",
+                "target": true
+              },
+              {
+                "text": " оставил синий зонт у двери музея.",
+                "target": false
+              }
+            ]
+          },
+          "exercises": {
+            "word_to_translation": {
+              "id": "fd838665-db9a-40a8-823f-570e317f8f24",
+              "prompt": "visitor",
+              "options": [
+                {
+                  "id": "ad06c8b3-68d5-46ba-bd97-600b68bf1ee7",
+                  "text": "хозяин"
+                },
+                {
+                  "id": "7ad03c70-ac68-4ab9-b212-7f211028d717",
+                  "text": "сосед"
+                },
+                {
+                  "id": "9a162581-be19-4ec1-974f-30db28963914",
+                  "text": "посетитель"
+                },
+                {
+                  "id": "8efac130-622e-4674-a0f5-3dfa72ed7b88",
+                  "text": "продавец"
+                }
+              ],
+              "correct_option_id": "9a162581-be19-4ec1-974f-30db28963914"
+            },
+            "context_ru_to_en": {
+              "id": "3afc211d-044f-4f44-b1aa-f1f8c6bd794f",
+              "prompt": "Посетитель задал вопрос о старой карте.",
+              "options": [
+                {
+                  "id": "b6f868f7-5e8a-4613-a468-5d454dfb4d6d",
+                  "text": "The visitor asked a question about the old map."
+                },
+                {
+                  "id": "718aa13b-4144-4fd6-ab40-80efa95ae1c6",
+                  "text": "The visitor answered a question about the old map."
+                },
+                {
+                  "id": "b0895875-3b74-43f4-a8c6-6f103fce54bc",
+                  "text": "The visitor asked a question about the new map."
+                },
+                {
+                  "id": "810281f3-bcae-494d-a5fd-e02e06292579",
+                  "text": "The visitor asked a question about the old painting."
+                }
+              ],
+              "correct_option_id": "b6f868f7-5e8a-4613-a468-5d454dfb4d6d"
+            },
+            "context_en_to_ru": {
+              "id": "183282b6-55e8-4fb4-8889-1d022e72b435",
+              "prompt": "A visitor left a blue umbrella by the museum door.",
+              "options": [
+                {
+                  "id": "a6b98acf-c5e0-40a9-8b04-5b217f2ccf55",
+                  "text": "Один посетитель забрал синий зонт у двери музея."
+                },
+                {
+                  "id": "5d65da7e-4c0e-4fbf-8889-0ef4184a5d32",
+                  "text": "Один посетитель оставил красный зонт у двери музея."
+                },
+                {
+                  "id": "748ed8b6-efba-4cf6-8840-63e1eb866f7a",
+                  "text": "Один посетитель оставил синий зонт у двери библиотеки."
+                },
+                {
+                  "id": "92076183-593a-4db3-94b7-2a4126c9fbb6",
+                  "text": "Один посетитель оставил синий зонт у двери музея."
+                }
+              ],
+              "correct_option_id": "92076183-593a-4db3-94b7-2a4126c9fbb6"
+            }
+          }
+        },
+        {
+          "id": "ffb0f757-6e1e-4225-b3d0-f841ac5f936b",
+          "sense_key": "adventure.exciting-experience",
+          "kind": "word",
+          "en": "adventure",
+          "ru": "приключение",
+          "example": {
+            "en": [
+              {
+                "text": "Our weekend ",
+                "target": false
+              },
+              {
+                "text": "adventure",
+                "target": true
+              },
+              {
+                "text": " began with a missed bus.",
+                "target": false
+              }
+            ],
+            "ru": [
+              {
+                "text": "Наше ",
+                "target": false
+              },
+              {
+                "text": "приключение",
+                "target": true
+              },
+              {
+                "text": " на выходных началось с того, что мы опоздали на автобус.",
+                "target": false
+              }
+            ]
+          },
+          "exercises": {
+            "word_to_translation": {
+              "id": "9f03dae8-c56e-4940-950f-140f15070e1f",
+              "prompt": "adventure",
+              "options": [
+                {
+                  "id": "0ff17e07-32a6-438b-bc21-87722a709f6a",
+                  "text": "обещание"
+                },
+                {
+                  "id": "3adb8ca8-63dc-4600-8cb7-004b38792641",
+                  "text": "соревнование"
+                },
+                {
+                  "id": "9638aaee-7c2f-4e90-9773-7769694b8bf8",
+                  "text": "расписание"
+                },
+                {
+                  "id": "435f85c7-eb86-4dba-9f67-01b22d44abac",
+                  "text": "приключение"
+                }
+              ],
+              "correct_option_id": "435f85c7-eb86-4dba-9f67-01b22d44abac"
+            },
+            "context_ru_to_en": {
+              "id": "72be1ee6-9d3d-4ec3-88bf-4e8bde2f3042",
+              "prompt": "Она записала рассказ о своём первом приключении в горах.",
+              "options": [
+                {
+                  "id": "386ead38-1c78-4ac6-90bd-80c001e55105",
+                  "text": "She wrote an account of her last adventure in the mountains."
+                },
+                {
+                  "id": "61fccec8-8d7e-4649-9571-c7fbbd6f6d32",
+                  "text": "She wrote an account of her first adventure in the mountains."
+                },
+                {
+                  "id": "6559db21-487d-443e-9172-b9b92dd691d0",
+                  "text": "She wrote an account of her first adventure at sea."
+                },
+                {
+                  "id": "7d944d09-3105-49b7-bbb0-d05a107c980f",
+                  "text": "She read an account of her first adventure in the mountains."
+                }
+              ],
+              "correct_option_id": "61fccec8-8d7e-4649-9571-c7fbbd6f6d32"
+            },
+            "context_en_to_ru": {
+              "id": "55a2302a-7675-4065-a0ee-132b5310b38a",
+              "prompt": "Our weekend adventure began with a missed bus.",
+              "options": [
+                {
+                  "id": "952ed8a8-0573-46ab-9459-2f5eaedcf6d6",
+                  "text": "Наше приключение на выходных началось с того, что мы опоздали на автобус."
+                },
+                {
+                  "id": "e5e56365-2e24-4aa6-a514-8428628b0936",
+                  "text": "Наше приключение на выходных закончилось тем, что мы опоздали на автобус."
+                },
+                {
+                  "id": "20ed5adf-eb0e-47f9-b17b-93ec93bdc6b6",
+                  "text": "Их приключение в понедельник началось с поездки на поезде."
+                },
+                {
+                  "id": "88c34746-7909-460f-842f-61f3cfc78838",
+                  "text": "Наше приключение на выходных началось с того, что мы успели на автобус."
+                }
+              ],
+              "correct_option_id": "952ed8a8-0573-46ab-9459-2f5eaedcf6d6"
+            }
+          }
+        }
+      ],
+      "pairs": {
+        "id": "3931e5fc-83fa-4adb-9794-f0c04e917f6f"
+      }
+    }
+  ]
+}
