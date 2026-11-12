@@ -1,0 +1,12 @@
+{
+  "expo": {
+    "name": "Storylex",
+    "slug": "storylex",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "scheme": "storylex",
+    "userInterfaceStyle": "automatic",
+    "plugins": ["expo-router", "expo-sqlite"],
+    "android": { "package": "app.storylex.mobile" }
+  }
+}
