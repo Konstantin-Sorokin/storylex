@@ -118,7 +118,8 @@ class AdminWorkflowTests(PublicationFixture, TestCase):
         self.publish_product()
         artifact = PackArtifact.objects.get()
         self.client.logout()
-        for url in ("/api/v1/catalog/head", "/media/" + artifact.object_key,
+        self.assertEqual(self.client.get("/api/v1/catalog/head").status_code, 200)
+        for url in ("/media/" + artifact.object_key,
                     "/content/" + artifact.object_key, "/" + artifact.object_key):
             self.assertEqual(self.client.get(url).status_code, 404)
 

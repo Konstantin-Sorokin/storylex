@@ -79,11 +79,12 @@ class CatalogAdminTests(TestCase):
         self.assertIn("kind", response.context["adminform"].form.errors)
         self.assertFalse(Section.objects.exists())
 
-    def test_json_import_and_public_api_are_unavailable(self):
+    def test_direct_draft_creation_and_auth_api_are_unavailable(self):
         self.client.force_login(self.staff)
         self.assertEqual(self.client.get(reverse(
             "admin:content_contentdraft_add",
         )).status_code, 403)
-        for path in ("/api/v1/catalog/head", "/api/v1/auth/exchange"):
+        self.assertEqual(self.client.get("/api/v1/catalog/head").status_code, 503)
+        for path in ("/api/v1/auth/exchange",):
             with self.subTest(path=path):
                 self.assertEqual(self.client.get(path).status_code, 404)

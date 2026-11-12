@@ -96,7 +96,7 @@ CONTENT_STORAGE_ROOT = Path(os.environ.get("CONTENT_STORAGE_ROOT") or BASE_DIR /
 # Uploaded source is limited before parsing; Django may spool it to a private temp file.
 DATA_UPLOAD_MAX_MEMORY_SIZE = 11 * 1024 * 1024
 
-# No API routes yet; future views must explicitly open public access.
+# Trial/catalogue views explicitly open public access; private API stays closed.
 REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.IsAuthenticated"],
     "DEFAULT_AUTHENTICATION_CLASSES": [],
