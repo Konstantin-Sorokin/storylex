@@ -1,6 +1,35 @@
 # Storylex: REST API v1
 
-Статус: предлагаемые контракты, не реализованный API. Детали алгоритмов — в [sync и SRS](sync-and-srs.md).
+Статус: целевые контракты; в 1.3 реализована только публичная доставка каталога
+и разрешённых проб, описанная ниже. Остальные API ещё не реализованы.
+Детали алгоритмов — в [sync и SRS](sync-and-srs.md).
+
+### Реализовано в 1.3
+
+- `GET /api/v1/catalog/head`: активный descriptor, ETag/304, no-cache; до готового
+  каталога 503 catalog_not_ready. object_key/source_revision не раскрываются.
+- `GET /api/v1/catalog/revisions/{id}`: байты активированного immutable snapshot,
+  размер/SHA-256 как в head, ETag/304 и immutable cache. Подготовленный orphan
+  без строки активации недоступен. Старые активированные снимки сохраняются.
+- `GET /api/v1/products/{id}/manifest?scope=trial&catalog_revision=R`: immutable
+  trial manifest указанного снимка (без R — активного); ETag/304, no-cache,
+  `X-Catalog-Revision`. Текущие разрешение пробы и availability проверяются
+  даже с историческим R и If-None-Match. Непубликованный draft не участвует.
+- `POST /api/v1/content/downloads`: только `{artifact_ids: [UUID, ...]}`,
+  1–100 ID; только опубликованные разрешённые trial artifacts; весь batch
+  отклоняется при недоступном ID, повторы ID не создают дубли ответа. Число
+  SQL-запросов ограничено независимо от длины batch.
+- `GET /api/v1/content/artifacts/{id}`: проверенные байты разрешённого trial
+  artifact, ETag/304 и no-cache; сервер повторно проверяет доступность.
+
+Это локальный storage adapter: URL формируются Django по ID, произвольные
+object_key не принимаются. У публичных trial downloads `expires_at=null`:
+они не являются подписанными private URL. У full-запроса manifest всегда 403
+full_access_required, full artifact недоступен даже по известному ID. Персональные
+права, claim-free, OAuth, signed full downloads и dev-auth не добавлялись.
+Эта выдача не даёт entitlement/библиотечную запись и не отменяет обязательный
+вход публичной версии приложения. Текущий мобильный каркас — только `__DEV__`.
+Остальная часть документа описывает целевой API следующих разрешённых этапов.
 
 ## 1. Общие правила
 
