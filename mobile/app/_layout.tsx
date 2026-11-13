@@ -10,6 +10,7 @@ export default function RootLayout() {
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
       <Stack.Screen name="products/[productId]" options={{ title: 'Произведение' }} />
       <Stack.Screen name="chapters/[productId]/[sectionId]" options={{ title: 'Уроки' }} />
+      <Stack.Screen name="lessons/[productId]/[lessonId]" options={{ headerShown: false, gestureEnabled: false }} />
     </Stack></ContentProvider>
   </SafeAreaView></SafeAreaProvider>;
 }

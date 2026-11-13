@@ -28,7 +28,7 @@ test('clean migration, repeated migration and close/reopen preserve actual chapt
     assert.deepEqual(await offline.catalog(), f.catalog);
     assert.deepEqual(await offline.document(f.source.product_id, f.source.section_id), f.source);
     assert.deepEqual(await offline.activeManifest(f.source.product_id), f.manifest);
-    assert.equal(await db.getFirstAsync('PRAGMA user_version').then((row) => JSON.stringify(row)), '{"user_version":1}');
+    assert.equal(await db.getFirstAsync('PRAGMA user_version').then((row) => JSON.stringify(row)), '{"user_version":2}');
   } finally { db.close(); rmSync(directory, { recursive: true }); }
 });
 

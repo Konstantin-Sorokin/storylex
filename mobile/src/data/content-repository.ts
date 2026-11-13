@@ -1,9 +1,11 @@
 import type { Catalog, Manifest, Source } from '../domain/content.ts';
 import { parseCatalog, parseManifest, parseSource, requireValid } from '../domain/validation.ts';
 import type { Database } from './database.ts';
+import type { LessonContext } from '../domain/lesson-run.ts';
 
 export class ContentRepository {
   private readonly db: Database;
+  private readonly pins = new Map<string, number>();
 
   constructor(db: Database) { this.db = db; }
 
@@ -61,7 +63,9 @@ export class ContentRepository {
           await tx.runAsync('INSERT INTO lesson_index (product_id, revision_id, scope, lesson_id, section_id, position, sha256) VALUES (?, ?, ?, ?, ?, ?, ?) ON CONFLICT DO NOTHING', manifest.product_id, manifest.revision_id, manifest.scope, lesson.id, document.section_id, lesson.position, descriptor.sha256);
         }
       }
-      await tx.runAsync('INSERT INTO active_packages (product_id, scope, revision_id) VALUES (?, ?, ?) ON CONFLICT(product_id, scope) DO UPDATE SET revision_id=excluded.revision_id', manifest.product_id, manifest.scope, manifest.revision_id);
+      const table = this.pins.has(manifest.product_id) ? 'ready_packages' : 'active_packages';
+      await tx.runAsync(`INSERT INTO ${table} (product_id, scope, revision_id) VALUES (?, ?, ?) ON CONFLICT(product_id, scope) DO UPDATE SET revision_id=excluded.revision_id`, manifest.product_id, manifest.scope, manifest.revision_id);
+      if (table === 'active_packages') await tx.runAsync('DELETE FROM ready_packages WHERE product_id = ? AND scope = ?', manifest.product_id, manifest.scope);
     });
   }
 
@@ -74,5 +78,61 @@ export class ContentRepository {
        JOIN active_packages a ON a.product_id = l.product_id AND a.revision_id = l.revision_id AND a.scope = l.scope
        WHERE a.product_id = ? AND a.scope = 'trial' AND l.section_id IS ? LIMIT 1`, productId, sectionId);
     return row ? parseSource(JSON.parse(row.json)) : null;
+  }
+
+  async pinLesson(productId: string, lessonId: string): Promise<{ context: LessonContext; release: () => Promise<void> }> {
+    this.pins.set(productId, (this.pins.get(productId) ?? 0) + 1);
+    let released = false;
+    const release = async () => {
+      if (released) return;
+      released = true;
+      const count = (this.pins.get(productId) ?? 1) - 1;
+      if (count > 0) { this.pins.set(productId, count); return; }
+      this.pins.delete(productId);
+      await this.activateReady(productId);
+    };
+    try {
+      const snapshot: { context?: LessonContext } = {};
+      // Use the same serialized writer as activation. An already-running update
+      // commits before this snapshot; later updates see the in-memory pin.
+      await this.db.withExclusiveTransactionAsync(async (tx) => {
+        const catalogRow = await tx.getFirstAsync<{ json: string }>('SELECT json FROM catalog_state WHERE id = 1');
+        const product = catalogRow ? parseCatalog(JSON.parse(catalogRow.json)).products.find((entry) => entry.id === productId) : null;
+        requireValid(product?.trial_enabled && product.availability === 'available', 'Пробный урок недоступен.');
+        const row = await tx.getFirstAsync<{ json: string; revision_id: string; manifest: string }>(
+          `SELECT b.json, a.revision_id, v.manifest FROM lesson_index l
+           JOIN active_packages a ON a.product_id = l.product_id AND a.revision_id = l.revision_id AND a.scope = l.scope
+           JOIN package_versions v ON v.product_id = a.product_id AND v.revision_id = a.revision_id AND v.scope = a.scope
+           JOIN document_blobs b ON b.sha256 = l.sha256
+           WHERE a.product_id = ? AND a.scope = 'trial' AND l.lesson_id = ?`, productId, lessonId);
+        requireValid(row, 'Урок не загружен. Обновите материалы в настройках.');
+        const manifest = parseManifest(JSON.parse(row.manifest));
+        const source = parseSource(JSON.parse(row.json));
+        const lesson = source.lessons.find((entry) => entry.id === lessonId);
+        requireValid(lesson && source.product_id === productId);
+        requireValid(manifest.product_id === productId && manifest.revision_id === row.revision_id && manifest.scope === 'trial');
+        requireValid(manifest.documents.some((document) => document.section_id === source.section_id && document.lesson_ids.includes(lessonId)));
+        snapshot.context = { productId, revisionId: row.revision_id, source, lesson };
+      });
+      requireValid(snapshot.context);
+      return { context: snapshot.context, release };
+    } catch (error) { await release(); throw error; }
+  }
+
+  async activateReady(productId?: string): Promise<void> {
+    await this.db.withExclusiveTransactionAsync(async (tx) => {
+      const rows = await tx.getAllAsync<{ product_id: string; revision_id: string; scope: string }>(
+        'SELECT product_id, revision_id, scope FROM ready_packages' + (productId ? ' WHERE product_id = ?' : ''),
+        ...(productId ? [productId] : []));
+      for (const row of rows) {
+        if (this.pins.has(row.product_id)) continue;
+        const catalogRow = await tx.getFirstAsync<{ json: string }>('SELECT json FROM catalog_state WHERE id = 1');
+        const product = catalogRow ? parseCatalog(JSON.parse(catalogRow.json)).products.find((entry) => entry.id === row.product_id) : null;
+        if (product?.revision_id !== row.revision_id || !product.trial_enabled || product.availability !== 'available') continue;
+        await tx.runAsync(`INSERT INTO active_packages (product_id, scope, revision_id) VALUES (?, ?, ?)
+          ON CONFLICT(product_id, scope) DO UPDATE SET revision_id=excluded.revision_id`, row.product_id, row.scope, row.revision_id);
+        await tx.runAsync('DELETE FROM ready_packages WHERE product_id = ? AND scope = ?', row.product_id, row.scope);
+      }
+    });
   }
 }

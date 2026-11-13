@@ -1,19 +1,22 @@
-import { createContext, useContext, useEffect, useState, type PropsWithChildren } from 'react';
+import { createContext, useCallback, useContext, useEffect, useState, type PropsWithChildren } from 'react';
 import { ActivityIndicator } from 'react-native';
 import { CryptoDigestAlgorithm, digestStringAsync } from 'expo-crypto';
 import { ContentRepository } from './content-repository.ts';
 import { migrate } from './database.ts';
-import { openContentDatabase } from './expo-database.ts';
+import { openContentDatabase, openLocalDatabase } from './expo-database.ts';
+import { LearningRepository, migrateLearning } from './learning-repository.ts';
 import { ContentDownloader } from '../infrastructure/downloader.ts';
 import { Action, Copy, Heading, Page } from '../ui/common.tsx';
 
 const API_URL = process.env.EXPO_PUBLIC_API_URL ?? 'http://10.0.2.2:8000/api/v1/';
-type Runtime = { repository: ContentRepository; downloader: ContentDownloader };
+type Runtime = { repository: ContentRepository; learning: LearningRepository; downloader: ContentDownloader };
 type ContentContext = Runtime & {
   revision: number;
   busy: boolean;
   errors: string[];
   prepare: () => Promise<void>;
+  refresh: () => void;
+  reportError: (message: string) => void;
 };
 const Context = createContext<ContentContext | null>(null);
 
@@ -23,6 +26,8 @@ export function ContentProvider({ children }: PropsWithChildren) {
   const [busy, setBusy] = useState(false);
   const [errors, setErrors] = useState<string[]>([]);
   const [attempt, setAttempt] = useState(0);
+  const refresh = useCallback(() => setRevision((value) => value + 1), []);
+  const reportError = useCallback((message: string) => setErrors((previous) => [...previous, message]), []);
   useEffect(() => {
     if (!__DEV__) return;
     let live = true;
@@ -31,10 +36,19 @@ export function ContentProvider({ children }: PropsWithChildren) {
     let close: (() => Promise<void>) | undefined;
     void (async () => {
       const connection = await openContentDatabase();
-      const db = connection.database;
       close = connection.close;
+      const local = await openLocalDatabase('storylex-learning-dev-v1.db');
+      close = async () => { await local.close(); await connection.close(); };
+      const db = connection.database;
       await migrate(db);
+      await migrateLearning(local.database);
       const repository = new ContentRepository(db);
+      const learning = new LearningRepository(local.database);
+      try {
+        await repository.activateReady();
+      } catch {
+        if (live) setErrors(['Не удалось применить обновление. Доступна сохранённая версия материалов.']);
+      }
       const downloader = new ContentDownloader(repository, API_URL,
         (text) => digestStringAsync(CryptoDigestAlgorithm.SHA256, text));
       // A warm launch reads SQLite only. Navigation never starts a download.
@@ -42,7 +56,7 @@ export function ContentProvider({ children }: PropsWithChildren) {
         const issues = await downloader.prepare();
         if (live) setErrors(issues);
       }
-      if (live) { keep = true; setRuntime({ repository, downloader }); }
+      if (live) { keep = true; setRuntime({ repository, learning, downloader }); }
     })().catch((error: unknown) => {
       if (live) setErrors([error instanceof Error ? error.message : 'Не удалось подготовить материалы.']);
     }).finally(() => {
@@ -71,7 +85,7 @@ export function ContentProvider({ children }: PropsWithChildren) {
       setBusy(false);
     }
   }
-  return <Context.Provider value={{ ...runtime, revision, busy, errors, prepare }}>{children}</Context.Provider>;
+  return <Context.Provider value={{ ...runtime, revision, busy, errors, prepare, refresh, reportError }}>{children}</Context.Provider>;
 }
 
 export function useContent(): ContentContext {

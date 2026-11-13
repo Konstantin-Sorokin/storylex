@@ -56,6 +56,13 @@ const migrations = [
      PRIMARY KEY (product_id, scope),
      FOREIGN KEY (product_id, revision_id, scope) REFERENCES package_versions(product_id, revision_id, scope)
    );`,
+  `CREATE TABLE ready_packages (
+     product_id TEXT NOT NULL,
+     scope TEXT NOT NULL,
+     revision_id TEXT NOT NULL,
+     PRIMARY KEY (product_id, scope),
+     FOREIGN KEY (product_id, revision_id, scope) REFERENCES package_versions(product_id, revision_id, scope)
+   );`,
 ];
 
 export async function migrate(db: Database): Promise<void> {

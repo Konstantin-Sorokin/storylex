@@ -3,8 +3,8 @@ import { Pressable, ScrollView, Text, useColorScheme, View } from 'react-native'
 
 export function useColors() {
   return useColorScheme() === 'dark'
-    ? { background: '#12181d', card: '#202c33', text: '#f2f6f7', muted: '#b4c4cc', accent: '#7ce0ba' }
-    : { background: '#f4f7f5', card: '#ffffff', text: '#162c28', muted: '#516861', accent: '#14664d' };
+    ? { background: '#12181d', card: '#202c33', text: '#f2f6f7', muted: '#b4c4cc', accent: '#7ce0ba', onAccent: '#102e25', line: '#42545d', good: '#93e9bd', goodSurface: '#173a2e', bad: '#ffaaa5', badSurface: '#482727' }
+    : { background: '#f4f7f5', card: '#ffffff', text: '#162c28', muted: '#516861', accent: '#14664d', onAccent: '#ffffff', line: '#d5dfda', good: '#146343', goodSurface: '#e3f3e9', bad: '#a12b31', badSurface: '#fce9e8' };
 }
 
 export function Page({ children }: PropsWithChildren) {
