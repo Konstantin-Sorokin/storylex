@@ -7,4 +7,5 @@ admin.site.site_title = "Storylex"
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/v1/", include("apps.content.api")),
+    path("api/v1/", include("apps.sync.api")),
 ]

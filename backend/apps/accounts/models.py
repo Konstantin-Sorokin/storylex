@@ -66,3 +66,9 @@ class User(AbstractUser):
 
     def __str__(self) -> str:
         return self.get_full_name()
+
+
+class Device(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(default=timezone.now, editable=False)

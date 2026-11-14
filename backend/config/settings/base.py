@@ -34,6 +34,8 @@ INSTALLED_APPS = [
     "apps.accounts.apps.AccountsConfig",
     "apps.content.apps.ContentConfig",
     "apps.feedback.apps.FeedbackConfig",
+    "apps.learning",
+    "apps.sync",
 ]
 
 MIDDLEWARE = [
