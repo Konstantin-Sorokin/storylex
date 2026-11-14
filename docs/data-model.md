@@ -1,6 +1,13 @@
 # Storylex: модель данных
 
-Статус: модель согласована как основа; реализованы этапы 1.1–1.4. Таблицы ниже описывают целевую модель, а не полный перечень уже созданных таблиц. Контекст — [архитектура](architecture.md).
+Статус: модель согласована как основа; реализованы этапы 1.1–1.5. Таблицы ниже описывают целевую модель, а не полный перечень уже созданных таблиц. Контекст — [архитектура](architecture.md).
+
+В 1.5 добавлены Device (user/UUID/created_at), LessonCompletion с server_revision,
+SyncInbox, UserSyncState и UserChange. Другие аккаунтные/учебные таблицы целевой
+схемы пока не реализованы. PostgreSQL-миграции новые, прежние не редактируются.
+Отдельная account-SQLite v1 хранит account_state, lesson_completions и outbox;
+result_json отделён от confirmed_json/server_revision. Публичная SQLite и
+dev-БД 1.4 не меняются. [Миграции, изоляция и протокол](sync-development.md).
 
 В 1.3 серверные модели и миграции не менялись. Мобильная SQLite v1 содержит
 catalog_state, document_blobs, package_versions, package_documents, lesson_index
