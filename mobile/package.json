@@ -8,8 +8,9 @@
     "node": ">=24.13.0"
   },
   "scripts": {
-    "start": "expo start",
-    "android": "expo start --android",
+    "start": "expo start --dev-client --localhost",
+    "android": "expo run:android --device",
+    "prebuild:android": "expo prebuild --platform android --no-install",
     "typecheck": "tsc --noEmit",
     "test": "node --test --test-isolation=none tests/*.test.ts",
     "export:android": "expo export --platform android"
@@ -19,6 +20,7 @@
     "expo": "~58.0.23",
     "expo-constants": "~58.0.15",
     "expo-crypto": "~58.0.7",
+    "expo-dev-client": "~58.0.20",
     "expo-linking": "~58.0.16",
     "expo-router": "~58.0.30",
     "expo-sqlite": "~58.0.15",

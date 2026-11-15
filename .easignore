@@ -1,0 +1,62 @@
+# EAS reads this file from the Git repository root, replacing ALL .gitignore rules.
+# Upload only the mobile build inputs and the JSON schemas imported by mobile/src.
+/*
+!/.easignore
+!/mobile
+!/contracts
+
+/mobile/*
+!/mobile/package.json
+!/mobile/package-lock.json
+!/mobile/app.json
+!/mobile/eas.json
+!/mobile/metro.config.cjs
+!/mobile/tsconfig.json
+!/mobile/app
+!/mobile/src
+!/mobile/assets
+# Keep the existing native project: EAS must not run Prebuild for this APK.
+!/mobile/android
+
+/contracts/*
+!/contracts/content
+
+# These exclusions apply even inside the allowed trees above.
+**/.git/
+**/.idea/
+**/.expo/
+**/node_modules/
+**/dist/
+**/build/
+**/.gradle/
+**/.cxx/
+**/.kotlin/
+**/local.properties
+**/gradle-daemon-jvm.properties
+**/*.iml
+**/*.hprof
+**/*.tsbuildinfo
+**/*.log
+**/.DS_Store
+
+# Never upload local environment files, credentials, signing keys or personal data.
+**/.env
+**/.env.*
+**/.npmrc
+**/.netrc
+**/credentials.json
+**/eas-build.gradle
+**/*.jks
+**/*.keystore
+**/*.p12
+**/*.pfx
+**/*.pem
+**/*.key
+**/*.apk
+**/*.aab
+**/*.db
+**/*.db-*
+**/*.sqlite
+**/*.sqlite-*
+**/*.sqlite3
+**/*.sqlite3-*

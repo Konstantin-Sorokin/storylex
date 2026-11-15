@@ -214,3 +214,18 @@ ios/Pods/
 *.sqlite3-journal
 *.sqlite3-wal
 *.sqlite3-shm
+
+# Expo Continuous Native Generation: regenerate from app.json + lockfile.
+/mobile/android/
+/mobile/ios/
+# Local Android signing and build artifacts
+*.apk
+*.aab
+*.jks
+*.keystore
+
+# EAS local signing configuration and generated signing integration
+credentials.json
+eas-build.gradle
+*.p12
+*.pfx

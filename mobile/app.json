@@ -1,12 +1,30 @@
 {
   "expo": {
-    "name": "Storylex",
+    "name": "Storylex Dev",
     "slug": "storylex",
     "version": "0.1.0",
     "orientation": "portrait",
-    "scheme": "storylex",
+    "scheme": "storylex-dev",
     "userInterfaceStyle": "automatic",
-    "plugins": ["expo-router", "expo-sqlite"],
-    "android": { "package": "app.storylex.mobile" }
+    "plugins": [
+      "expo-router",
+      "expo-sqlite",
+      "expo-dev-client"
+    ],
+    "android": {
+      "package": "app.storylex.mobile.dev",
+      "allowBackup": false
+    },
+    "extra": {
+      "router": {
+        "asyncRoutes": {
+          "web": true
+        }
+      },
+      "eas": {
+        "projectId": "b206e285-afff-4242-87a6-01eadd430549"
+      }
+    },
+    "owner": "konstantinsorokin"
   }
 }
