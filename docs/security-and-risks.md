@@ -4,6 +4,16 @@
 
 ## 1. Вход и управление аккаунтом
 
+В 2.1 подготовлены [Android development build и отдельный HTTPS-профиль](auth-development.md).
+Профиль не наследует DEBUG/dev-auth даже из включённого локального `.env`,
+не публикует Admin/sync и принимает только точный HTTPS host. Новых сеансов,
+OAuth credentials и private-доставки пока нет. Проверенные требования провайдеров,
+две независимые PKCE-связки и действия владельца — в [исследовании OAuth](auth-design.md).
+Рабочий EAS APK, Metro, подключение к Django и dev-вход подтверждены владельцем
+на Android 15.11.2026. Внешний HTTPS-транспорт, OAuth и release-signed provider
+flows пока не проверены. Online Expo check рекомендует семь patch-обновлений;
+они не применялись. Ограничения и финальные проверки — в [EAS-инструкции](eas-development.md).
+
 В 1.5 доступен исключительно локальный dev-вход: settings.dev + DEBUG +
 серверный opt-in, отдельный случайный токен и provisioned non-staff User.
 Клиент не задаёт user_id; Device привязан к аутентифицированному User.

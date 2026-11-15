@@ -59,6 +59,13 @@ full_access_required, full artifact недоступен даже по изве�
 
 ## 2. Авторизация и профиль
 
+В 2.1 исследована серверная схема с отдельным HTTPS callback для каждого
+провайдера и Android-return `storylex-dev://auth/callback`. Это два разных URI:
+провайдеру регистрируется HTTPS callback, в приложение возвращается собственный
+одноразовый ticket. Device proof и provider PKCE имеют разные verifier.
+[Исследование и предложение](auth-design.md). Новых endpoints и обязательных
+полей API в 2.1 нет; таблица ниже по-прежнему целевая, до реального spike.
+
 | Метод и путь | Запрос | Результат |
 |---|---|---|
 | `POST /auth/attempts` | provider google/yandex; purpose login/link; callback из allowlist; challenge устройства для возврата | attempt_id, authorization_url, expires_at; для link нужна действующая сессия |

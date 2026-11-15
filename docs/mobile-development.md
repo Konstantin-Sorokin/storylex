@@ -1,5 +1,18 @@
 # Мобильный клиент: этапы 1.3–1.5
 
+**Текущий запуск с 2.1:** собственный Storylex Dev вместо Expo Go. Установка APK,
+Windows/WSL, USB без portproxy, сохранение прогресса Expo Go и отдельный HTTPS
+описаны в [инструкции development build](auth-development.md). Владелец подтвердил
+EAS APK, установку/Metro/Django/dev-вход на реальном Android 15.11.2026;
+ниже — история 1.3–1.5. Внешний HTTPS пока не проверен.
+`npm start` теперь запускает dev-client на localhost, `npm run android` собирает
+и устанавливает его; для прежнего Expo Go требуется явное `npx expo start --go`.
+
+Для первой APK владелец выбрал EAS Build (15.11.2026):
+[инструкция без локальных JDK/Android SDK](eas-development.md).
+`npm run android` относится только к локальной сборке; облачную запускает
+владелец через `eas build --platform android --profile development`.
+
 Этап 1.5 принят владельцем 14.11.2026 на реальном Android: завершение при
 недоступном Django, сохранение прогресса/операции и pending в SQLite, доставка
 после восстановления связи и pending = 0. Автоматические проверки повторены
